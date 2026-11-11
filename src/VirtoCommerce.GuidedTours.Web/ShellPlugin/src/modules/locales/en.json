@@ -1,0 +1,9 @@
+{
+  "GUIDED_TOURS": {
+    "NEXT": "Next",
+    "BACK": "Back",
+    "DONE": "Got it",
+    "SKIP_STEP": "Skip this step",
+    "PROGRESS": "{current} of {total}"
+  }
+}

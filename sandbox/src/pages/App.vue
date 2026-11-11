@@ -1,0 +1,42 @@
+<template>
+  <VcApp
+    :is-ready="isReady"
+    :logo="logoImage"
+    title="Sandbox"
+    :version="version"
+  >
+  </VcApp>
+</template>
+
+<script lang="ts" setup>
+import { useUser, useBroadcastFilter } from "@vc-shell/framework";
+import { VcApp } from "@vc-shell/framework/ui";
+import { onMounted, ref } from "vue";
+import logoImage from "/assets/logo.svg";
+
+const isReady = ref(false);
+const version = import.meta.env.PACKAGE_VERSION;
+
+const { isAuthenticated } = useUser();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the TODO example below
+const { setBroadcastFilter } = useBroadcastFilter();
+
+onMounted(async () => {
+  try {
+    if (isAuthenticated.value) {
+      // TODO: Set broadcast filter to receive only relevant push notifications.
+      // Example: setBroadcastFilter((msg) => msg.creator === sellerId);
+      isReady.value = true;
+    }
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+});
+
+console.debug(`Initializing App`);
+</script>
+
+<style lang="scss">
+@use "./../styles/index.scss";
+</style>

@@ -1,0 +1,39 @@
+import { ref } from "vue";
+import { useAsync, useLoading } from "@vc-shell/framework";
+
+export default function useOrdersDetails() {
+  const item = ref<Record<string, any>>({});
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the TODO API call below
+  const { loading: itemLoading, action: fetchItem } = useAsync(async (id?: string) => {
+    // TODO: Replace with real API call
+    // const result = await apiClient.getById(id);
+    // item.value = result;
+  });
+
+  const { loading: saveLoading, action: saveAction } = useAsync(async () => {
+    // TODO: Replace with real API call
+    // if (item.value.id) {
+    //   await apiClient.update(item.value);
+    // } else {
+    //   await apiClient.create(item.value);
+    // }
+  });
+
+  const loading = useLoading(itemLoading, saveLoading);
+
+  async function getItem(id: string) {
+    await fetchItem(id);
+  }
+
+  async function saveItem() {
+    await saveAction();
+  }
+
+  return {
+    item,
+    loading,
+    getItem,
+    saveItem,
+  };
+}

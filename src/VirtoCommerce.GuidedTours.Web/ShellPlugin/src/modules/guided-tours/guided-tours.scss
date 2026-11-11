@@ -1,0 +1,41 @@
+.driver-popover.guided-tour {
+  max-width: 340px;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  color: var(--neutrals-800, #333);
+  background: var(--additional-50, #fff);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 18%);
+
+  .driver-popover-title {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .driver-popover-description {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .driver-popover-progress-text {
+    color: var(--neutrals-500, #888);
+  }
+
+  .driver-popover-footer button {
+    padding: 6px 12px;
+    border: 1px solid var(--primary-500, #43b0e6);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    text-shadow: none;
+    color: var(--primary-500, #43b0e6);
+    background: transparent;
+  }
+
+  .driver-popover-footer .driver-popover-next-btn {
+    color: var(--additional-50, #fff);
+    background: var(--primary-500, #43b0e6);
+  }
+}

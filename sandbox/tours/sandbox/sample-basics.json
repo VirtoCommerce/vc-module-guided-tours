@@ -1,0 +1,64 @@
+{
+  "id": "sample.basics",
+  "version": 1,
+  "publishedAt": "2026-11-11",
+  "trigger": {
+    "bladeOpened": "SampleList"
+  },
+  "steps": [
+    {
+      "title": "SAMPLE_APP.TOUR.INTRO_TITLE",
+      "text": "SAMPLE_APP.TOUR.INTRO"
+    },
+    {
+      "target": {
+        "css": "[data-tour='sample.table'] .vc-input"
+      },
+      "title": "SAMPLE_APP.TOUR.SEARCH_TITLE",
+      "text": "SAMPLE_APP.TOUR.SEARCH",
+      "placement": "bottom",
+      "action": {
+        "until": {
+          "bladeQueryChanged": "SampleList"
+        }
+      }
+    },
+    {
+      "target": {
+        "css": "[data-tour='sample.table'] .vc-data-table__rows-container"
+      },
+      "title": "SAMPLE_APP.TOUR.SELECT_TITLE",
+      "text": "SAMPLE_APP.TOUR.SELECT",
+      "placement": "bottom",
+      "action": {
+        "until": {
+          "elementAppears": {
+            "css": "[data-tour='sample.table'] .vc-data-table__rows-container input:checked"
+          },
+          "atLeast": 2
+        }
+      }
+    },
+    {
+      "target": {
+        "css": "[data-test-id='discount']"
+      },
+      "title": "SAMPLE_APP.TOUR.BULK_TITLE",
+      "text": "SAMPLE_APP.TOUR.BULK",
+      "placement": "bottom",
+      "action": {
+        "until": {
+          "click": true
+        }
+      }
+    },
+    {
+      "target": {
+        "css": "[data-tour='sample.table'] .vc-data-table__rows-container"
+      },
+      "title": "SAMPLE_APP.TOUR.RESULT_TITLE",
+      "text": "SAMPLE_APP.TOUR.RESULT",
+      "placement": "bottom"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+  <id>VirtoCommerce.GuidedTours</id>
+  <version>3.1000.0</version>
+  <version-tag></version-tag>
+
+  <platformVersion>3.1076.3</platformVersion>
+  <dependencies>
+    <!--<dependency id="VirtoCommerce.Core" version="3.1012.0" />-->
+  </dependencies>
+
+  <title>Guided Tours</title>
+  <description>Shows Backoffice users a short interactive tour of a new feature the first time they open its screen. Any module can ship its own tours.</description>
+
+  <authors>
+    <author>Ivan Kalachikov</author>
+  </authors>
+  <owners>
+    <owner>VirtoCommerce</owner>
+  </owners>
+
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-guided-tours</projectUrl>
+  <iconUrl>Modules/$(VirtoCommerce.GuidedTours)/Content/logo.png</iconUrl>
+  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+  <assemblyFile>VirtoCommerce.GuidedTours.Web.dll</assemblyFile>
+  <moduleType>VirtoCommerce.GuidedTours.Web.Module, VirtoCommerce.GuidedTours.Web</moduleType>
+
+  <releaseNotes>First version.</releaseNotes>
+  <copyright>Copyright © 2026 VirtoCommerce. All rights reserved</copyright>
+  <tags>back-office onboarding tours</tags>
+  <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+</module>

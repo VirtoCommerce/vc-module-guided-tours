@@ -1,0 +1,10 @@
+{
+  "settings": {
+    "GuidedTours": {
+      "Enabled": {
+        "title": "Show guided tours",
+        "description": "Start feature tours automatically for back-office users. Turn off to hide every tour."
+      }
+    }
+  }
+}

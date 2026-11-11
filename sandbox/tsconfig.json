@@ -1,0 +1,20 @@
+{
+  "extends": "@vc-shell/ts-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "rootDir": "..",
+    "paths": {
+      "@guided-tours": ["../src/VirtoCommerce.GuidedTours.Web/ShellPlugin/src/modules"]
+    },
+    "types": ["vite/client", "@vc-shell/framework/globals"]
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.vue",
+    "./src/**/*.json",
+    "../src/VirtoCommerce.GuidedTours.Web/ShellPlugin/src/**/*.ts",
+    "../src/VirtoCommerce.GuidedTours.Web/ShellPlugin/src/**/*.json"
+  ],
+  "exclude": ["../src/VirtoCommerce.GuidedTours.Web/ShellPlugin/src/**/*.test.ts", "../src/VirtoCommerce.GuidedTours.Web/ShellPlugin/src/**/test-helpers.ts"]
+}

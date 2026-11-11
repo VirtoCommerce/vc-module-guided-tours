@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+    <NoWarn>1591;NU1608</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Content Remove="dist\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <None Remove="dist\**" />
+    <Compile Remove="ShellPlugin\**" />
+    <Content Remove="ShellPlugin\**" />
+    <EmbeddedResource Remove="ShellPlugin\**" />
+    <None Remove="ShellPlugin\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Localizations\**">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.GuidedTours.Core\VirtoCommerce.GuidedTours.Core.csproj" />
+  </ItemGroup>
+</Project>

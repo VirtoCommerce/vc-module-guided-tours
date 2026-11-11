@@ -1,0 +1,52 @@
+import { ref, type Ref } from "vue";
+import { useAsync, useLatestRequest, useLoading } from "@vc-shell/framework";
+
+export interface OrdersListQuery {
+  keyword?: string;
+  sort?: string;
+  skip?: number;
+  take?: number;
+}
+
+export default function useOrdersList() {
+  const data: Ref<Record<string, any>[]> = ref([]);
+  const totalCount = ref(0);
+
+  // The list page searches as you type. A slow answer to an earlier keyword can
+  // arrive after a newer one, so route the call through `search.latest`: it
+  // hands back `undefined` once a newer search has started.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the TODO API call below
+  const search = useLatestRequest();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the TODO API call below
+  const { loading: itemsLoading, action: getItems } = useAsync<OrdersListQuery>(async (query) => {
+    // TODO: Replace with real API call
+    // const result = await search.latest(
+    //   apiClient.search({
+    //     keyword: query?.keyword,
+    //     sort: query?.sort,
+    //     skip: query?.skip ?? 0,
+    //     take: query?.take ?? 20,
+    //   }),
+    // );
+    // if (!result) return; // a newer search superseded this one
+    // data.value = result.results ?? [];
+    // totalCount.value = result.totalCount ?? 0;
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- used by the TODO API call below
+  const { loading: deleteLoading, action: removeItems } = useAsync(async (ids?: string[]) => {
+    // TODO: Replace with real API call
+    // await Promise.all((ids ?? []).map((id) => apiClient.delete(id)));
+  });
+
+  const loading = useLoading(itemsLoading, deleteLoading);
+
+  return {
+    data,
+    loading,
+    totalCount,
+    getItems,
+    removeItems,
+  };
+}

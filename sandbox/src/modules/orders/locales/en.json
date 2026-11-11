@@ -1,0 +1,33 @@
+{
+  "ORDERS": {
+    "MENU": {
+      "TITLE": "Orders"
+    },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "Orders",
+        "COLUMNS": {
+          "NAME": "Name",
+          "CREATED_DATE": "Created"
+        },
+        "TOOLBAR": {
+          "REFRESH": "Refresh",
+          "ADD": "Add"
+        }
+      },
+      "DETAILS": {
+        "TITLE": "Orders Details",
+        "TITLE_NEW": "New Orders",
+        "FIELDS": {
+          "NAME": "Name"
+        },
+        "TOOLBAR": {
+          "SAVE": "Save"
+        }
+      }
+    },
+    "ALERTS": {
+      "CLOSE_CONFIRMATION": "You have unsaved changes. Are you sure you want to close?"
+    }
+  }
+}
