@@ -17,8 +17,9 @@ Any module can ship tours for its own features. A tour is a JSON file inside the
 * Each user sees a tour version once. Finishing or closing it is remembered in the user's profile.
 * Raising a tour's `version` shows the updated tour to everyone again.
 * Tours are shown only to users with the listed permissions, and not to users created after the feature shipped.
-* Texts come from the declaring module's locales.
-* One global setting turns all tours off.
+* Texts in several languages; each user gets their interface language, falling back to English.
+* The **Guided Tours** app lists every tour, shows its steps in plain words, switches tours on and off one by one or all at once, and launches any tour in a new tab.
+* Custom tours: created in the app by pasting JSON or filling in a step form, stored in the module's database.
 
 ## How it works
 
@@ -28,25 +29,29 @@ A module puts tour definitions in its package at `tours/{appId}/{name}.json`, wh
 {
   "id": "products.bulk-actions",
   "version": 1,
+  "title": { "en-US": "Bulk price change" },
   "publishedAt": "2026-11-11",
   "permissions": ["product:update"],
   "priority": 0,
   "trigger": { "bladeOpened": "ProductsList" },
   "steps": [
-    { "title": "PRODUCTS.TOUR.TITLE", "text": "PRODUCTS.TOUR.INTRO" },
     {
-      "target": { "css": "[data-tour='products.table'] .vc-input" },
-      "text": "PRODUCTS.TOUR.SEARCH",
+      "title": { "en-US": "Change prices in bulk", "de-DE": "Preise gesammelt ändern" },
+      "text": { "en-US": "Select products and apply a discount to all of them at once." }
+    },
+    {
+      "target": { "css": "[data-tour='products.table'] .vc-input", "label": "search field" },
+      "text": { "en-US": "Find the products you want to change." },
       "action": { "until": { "bladeQueryChanged": "ProductsList" } }
     },
     {
       "target": "products.table",
-      "text": "PRODUCTS.TOUR.SELECT",
+      "text": { "en-US": "Pick at least two products." },
       "action": {
         "until": { "elementAppears": { "css": "[data-tour='products.table'] input:checked" }, "atLeast": 2 }
       }
     },
-    { "target": { "css": "[data-test-id='discount']" }, "text": "PRODUCTS.TOUR.BULK" }
+    { "target": { "css": "[data-test-id='discount']", "label": "discount action" }, "text": { "en-US": "Apply the discount." } }
   ]
 }
 ```
@@ -54,12 +59,13 @@ A module puts tour definitions in its package at `tours/{appId}/{name}.json`, wh
 | Field | Meaning |
 | --- | --- |
 | `id`, `version` | Identity. A user who finished or closed this version never sees it again. |
+| `title` | The tour's name in the Guided Tours app, per language. |
 | `publishedAt` | When the feature shipped. Users whose account was created later do not get the tour. |
 | `permissions` | The tour is shown only to users with any of these permissions. |
 | `priority` | Tours run one at a time; higher priority goes first. |
 | `trigger` | `{ "appReady": true }` or `{ "bladeOpened": "<blade name>" }`. |
-| `steps[].target` | A `data-tour` anchor name, or `{ "css": "…" }` for markup the module does not own. No target: a centred hint. |
-| `steps[].title`, `text` | i18n keys from the module's own locales (plain text also works). |
+| `steps[].target` | A `data-tour` anchor name, `{ "anchor": "…" }`, or `{ "css": "…" }` for markup the module does not own. The object forms take an optional `label` the app shows instead of the selector. No target: a centred hint. |
+| `steps[].title`, `text` | Text per language code, such as `{ "en-US": "…", "de-DE": "…" }`. The user's interface language is used, then the same language in another region, then English, then the first text. |
 | `steps[].action.until` | `bladeOpened`, `bladeQueryChanged` (table page, sort, search), `routeChanged`, `elementAppears` (with an optional `atLeast` count), or `click` on the target. |
 | `steps[].action.timeout` | After this many ms the user is offered to skip the step. |
 | `steps[].waitFor` | How long to wait for the target to render; a step whose target never appears is skipped. |
@@ -79,7 +85,24 @@ A tour closes without being remembered when its trigger blade closes, and starts
 
 ### Permissions
 
-The module defines no permissions. Tours list the permissions of the features they describe.
+| Permission | Allows |
+| --- | --- |
+| `guided-tours:access` | Open the Guided Tours app, see tours, launch them. |
+| `guided-tours:manage` | Create, edit, copy and delete custom tours; switch tours on and off, one or all. |
+
+Tours themselves list the permissions of the features they describe.
+
+## Guided Tours app
+
+The app opens from the Apps menu (and embedded in the admin). It lists module and custom tours together:
+
+* **Details** describe each step from its structure: hint or action, what it points at (the target's `label`, else its selector), and what an action waits for.
+* **On / off** per tour, and **Show tours to users** for all of them. A tour that is off is not served to users.
+* **Launch** opens the tour's app in a new tab at `/apps/{appId}/?tour={id}`, opens the trigger blade and runs the tour at once, whether it is on or off and whether the user has seen it. Nothing is recorded.
+* **Copy as custom** turns a module tour into an editable custom tour, switched off.
+* **Custom tours** are edited as a step form or as JSON, in every language from the `VirtoCommerce.Core.General.Languages` setting. Saving validates the format; problems are listed with their path, and a tour that is on is published at once.
+
+If a module installed later ships a tour with a custom tour's id, the module tour wins and the custom tour is marked as conflicting until it gets another id.
 
 ## Components
 
@@ -87,8 +110,10 @@ The module defines no permissions. Tours list the permissions of the features th
 
 | Project | Description |
 | --- | --- |
-| `VirtoCommerce.GuidedTours.Core` | Settings and the rule that keeps tours from users created after a feature shipped. |
+| `VirtoCommerce.GuidedTours.Core` | Settings, permissions, the tour format validator and the rules for merging, switching and serving tours. |
+| `VirtoCommerce.GuidedTours.Data` | Custom tours and per-tour switches, with `Data.SqlServer`, `Data.PostgreSql` and `Data.MySql` migrations. |
 | `VirtoCommerce.GuidedTours.Web` | Module entry point, tour discovery and REST API. |
+| `VirtoCommerce.GuidedTours.Web/App` | The Guided Tours app (VC-Shell), built into `Content/guided-tours`. |
 | `VirtoCommerce.GuidedTours.Web/ShellPlugin` | VC-Shell plugin with the tour engine, rendered with [driver.js](https://driverjs.com). Host apps load it through Module Federation; it reads its `appId` from the `plugins/{appId}/` folder it is served from. |
 | `sandbox` | A VC-Shell app in demo mode with the plugin wired in directly, a sample tour and progress in localStorage. |
 
@@ -96,7 +121,14 @@ The module defines no permissions. Tours list the permissions of the features th
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
-| GET | `/api/guided-tours/apps/{appId}/tours` | Tours every installed module ships for the host app, minus tours the current user should not get. Empty when tours are off. |
+| GET | `/api/guided-tours/apps/{appId}/tours` | Module and custom tours for the host app that are on, minus tours the current user should not get. Empty when tours are off. |
+| GET | `/api/guided-tours/tours?appId=` | All tours with source, module, on/off and conflict flag. `guided-tours:access`. |
+| GET | `/api/guided-tours/tours/{id}` | One tour; used by launch. `guided-tours:access`. |
+| POST, PUT, DELETE | `/api/guided-tours/tours`, `/tours/{id}` | Create, update (also rename) and delete custom tours. Invalid tours get `400 { problems }`. `guided-tours:manage`. |
+| POST | `/api/guided-tours/tours/{id}/copy` | Copy any tour as a custom tour. `guided-tours:manage`. |
+| PUT | `/api/guided-tours/tours/{id}/enabled` | Switch one tour on or off. `guided-tours:manage`. |
+| POST | `/api/guided-tours/tours/validate` | Validate a tour without saving it. `guided-tours:access`. |
+| GET, PUT | `/api/guided-tours/settings` | Read or switch all tours on or off. PUT needs `guided-tours:manage`. |
 
 ## Development
 
@@ -107,6 +139,12 @@ dotnet test VirtoCommerce.GuidedTours.sln
 ```bash
 cd src/VirtoCommerce.GuidedTours.Web/ShellPlugin && yarn install && yarn test run && yarn type-check && yarn build
 ```
+
+```bash
+cd src/VirtoCommerce.GuidedTours.Web/App && yarn install && yarn test && yarn type-check && yarn build
+```
+
+The module does not start without the built app in `Content/guided-tours`.
 
 ```bash
 cd sandbox && yarn install && yarn serve
