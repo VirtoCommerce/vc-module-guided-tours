@@ -63,18 +63,6 @@
           "ALL": "all {totalCount}"
         }
       }
-    },
-    "TOUR": {
-      "INTRO_TITLE": "New in Products",
-      "INTRO": "Find products by name and change several at once. Let's try it — it takes half a minute.",
-      "SEARCH_TITLE": "Find it fast",
-      "SEARCH": "Type “desk” to search the catalog by name.",
-      "SELECT_TITLE": "Pick several",
-      "SELECT": "Tick both desks.",
-      "BULK_TITLE": "Bulk actions",
-      "BULK": "Toolbar actions now apply to every selected product. Cut both sale prices by 10% in one click.",
-      "RESULT_TITLE": "Done",
-      "RESULT": "Both prices changed at once — one click instead of editing each product."
     }
   }
 }
