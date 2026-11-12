@@ -1,0 +1,8 @@
+{
+  "name": "vc-module-guided-tours",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "webpack:build": "node build-frontend.mjs"
+  }
+}

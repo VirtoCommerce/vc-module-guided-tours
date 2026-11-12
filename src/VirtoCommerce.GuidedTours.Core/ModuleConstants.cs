@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using VirtoCommerce.Platform.Core.Settings;
 
@@ -8,9 +9,10 @@ public static class ModuleConstants
 {
     /// <summary>
     /// Folder under each installed module's root that holds tour definitions,
-    /// one subfolder per target host app: <c>{moduleRoot}/tours/{appId}/*.json</c>.
+    /// one subfolder per target host app: <c>{moduleRoot}/Content/tours/{appId}/*.json</c>.
+    /// It sits in <c>Content</c> because that is one of the Web project folders module packages carry.
     /// </summary>
-    public const string ToursFolder = "tours";
+    public static readonly string ToursFolder = Path.Combine("Content", "tours");
 
     public const string UserProfileTenant = "UserProfile";
 

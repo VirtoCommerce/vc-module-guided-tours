@@ -26,7 +26,7 @@
     <author>Ivan Kalachikov</author>
   </authors>
   <owners>
-    <owner>VirtoCommerce</owner>
+    <owner>Virto Commerce</owner>
   </owners>
 
   <projectUrl>https://github.com/VirtoCommerce/vc-module-guided-tours</projectUrl>
@@ -37,7 +37,10 @@
   <moduleType>VirtoCommerce.GuidedTours.Web.Module, VirtoCommerce.GuidedTours.Web</moduleType>
 
   <releaseNotes>First version.</releaseNotes>
-  <copyright>Copyright © 2026 VirtoCommerce. All rights reserved</copyright>
+  <copyright>Copyright © 2026 Virto Commerce. All rights reserved</copyright>
   <tags>back-office onboarding tours</tags>
   <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+  <groups>
+    <group>commerce</group>
+  </groups>
 </module>

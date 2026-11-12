@@ -38,7 +38,7 @@ Today a tour exists only as a JSON file shipped inside a module, and nobody can 
 
 | | Module tour | Custom tour |
 | --- | --- | --- |
-| Source | `tours/{appId}/*.json` in a module package (exists today) | Created in the app, stored in the module's database |
+| Source | `Content/tours/{appId}/*.json` in a module package | Created in the app, stored in the module's database |
 | Edit / delete | No | Yes |
 | On / off | Yes | Yes |
 | Launch | Yes | Yes |

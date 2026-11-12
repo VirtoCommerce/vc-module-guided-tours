@@ -23,7 +23,7 @@ Any module can ship tours for its own features. A tour is a JSON file inside the
 
 ## How it works
 
-A module puts tour definitions in its package at `tours/{appId}/{name}.json`, where `appId` is the VC-Shell host app the tour runs in:
+A module puts tour definitions in its Web project at `Content/tours/{appId}/{name}.json`, so they ship in the module package. `appId` is the VC-Shell host app the tour runs in:
 
 ```json
 {
