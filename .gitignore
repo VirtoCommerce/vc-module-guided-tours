@@ -350,3 +350,6 @@ sandbox/.yarn/*
 **/.yarn/install-state.gz
 *.tsbuildinfo
 .env.local
+
+.superpowers/
+.claude/worktrees/
