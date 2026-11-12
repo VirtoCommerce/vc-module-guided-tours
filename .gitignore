@@ -341,6 +341,7 @@ dist/
 # Frontend
 node_modules/
 src/VirtoCommerce.GuidedTours.Web/ShellPlugin/dist/
+src/VirtoCommerce.GuidedTours.Web/Content/guided-tours/
 src/VirtoCommerce.GuidedTours.Web/plugins/
 sandbox/dist/
 sandbox/.yarn/*
