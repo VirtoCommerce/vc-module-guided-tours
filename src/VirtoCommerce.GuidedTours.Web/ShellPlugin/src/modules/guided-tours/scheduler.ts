@@ -1,5 +1,5 @@
 import { watch } from "vue";
-import { runTour, type TourRenderer } from "./runner";
+import { runTriggeredTour, type TourRenderer } from "./runner";
 import { isTourDue, recordTour } from "./state";
 import type { TourContext, TourDefinition, TourSource, ToursState } from "./types";
 
@@ -61,20 +61,8 @@ export function startScheduler(options: SchedulerOptions): Scheduler {
     const controller = new AbortController();
     running = controller;
 
-    const bladeId = triggerBlade(tour)?.id;
-    const stopBladeWatch = bladeId
-      ? watch(
-          () => context.blades().some((blade) => blade.id === bladeId),
-          (open) => {
-            if (!open) {
-              controller.abort();
-            }
-          },
-        )
-      : undefined;
-
     try {
-      const outcome = await runTour(tour, {
+      const outcome = await runTriggeredTour(tour, {
         context,
         renderer: options.createRenderer(),
         translate: options.translate,
@@ -87,7 +75,6 @@ export function startScheduler(options: SchedulerOptions): Scheduler {
         await source.saveState(state);
       }
     } finally {
-      stopBladeWatch?.();
       running = undefined;
     }
   }

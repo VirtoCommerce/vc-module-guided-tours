@@ -1,21 +1,33 @@
 {
   "id": "sample.basics",
   "version": 1,
+  "title": {
+    "en-US": "Products: search and bulk actions"
+  },
   "publishedAt": "2026-11-11",
   "trigger": {
     "bladeOpened": "SampleList"
   },
   "steps": [
     {
-      "title": "SAMPLE_APP.TOUR.INTRO_TITLE",
-      "text": "SAMPLE_APP.TOUR.INTRO"
+      "title": {
+        "en-US": "New in Products"
+      },
+      "text": {
+        "en-US": "Find products by name and change several at once. Let's try it — it takes half a minute."
+      }
     },
     {
       "target": {
-        "css": "[data-tour='sample.table'] .vc-input"
+        "css": "[data-tour='sample.table'] .vc-input",
+        "label": "search field"
       },
-      "title": "SAMPLE_APP.TOUR.SEARCH_TITLE",
-      "text": "SAMPLE_APP.TOUR.SEARCH",
+      "title": {
+        "en-US": "Find it fast"
+      },
+      "text": {
+        "en-US": "Type “desk” to search the catalog by name."
+      },
       "placement": "bottom",
       "action": {
         "until": {
@@ -25,15 +37,21 @@
     },
     {
       "target": {
-        "css": "[data-tour='sample.table'] .vc-data-table__rows-container"
+        "css": "[data-tour='sample.table'] .vc-data-table__rows-container",
+        "label": "product rows"
       },
-      "title": "SAMPLE_APP.TOUR.SELECT_TITLE",
-      "text": "SAMPLE_APP.TOUR.SELECT",
+      "title": {
+        "en-US": "Pick several"
+      },
+      "text": {
+        "en-US": "Tick both desks."
+      },
       "placement": "bottom",
       "action": {
         "until": {
           "elementAppears": {
-            "css": "[data-tour='sample.table'] .vc-data-table__rows-container input:checked"
+            "css": "[data-tour='sample.table'] .vc-data-table__rows-container input:checked",
+            "label": "ticked product checkboxes"
           },
           "atLeast": 2
         }
@@ -41,10 +59,15 @@
     },
     {
       "target": {
-        "css": "[data-test-id='discount']"
+        "css": "[data-test-id='discount']",
+        "label": "10% off button"
       },
-      "title": "SAMPLE_APP.TOUR.BULK_TITLE",
-      "text": "SAMPLE_APP.TOUR.BULK",
+      "title": {
+        "en-US": "Bulk actions"
+      },
+      "text": {
+        "en-US": "Toolbar actions now apply to every selected product. Cut both sale prices by 10% in one click."
+      },
       "placement": "bottom",
       "action": {
         "until": {
@@ -54,10 +77,15 @@
     },
     {
       "target": {
-        "css": "[data-tour='sample.table'] .vc-data-table__rows-container"
+        "css": "[data-tour='sample.table'] .vc-data-table__rows-container",
+        "label": "product rows"
       },
-      "title": "SAMPLE_APP.TOUR.RESULT_TITLE",
-      "text": "SAMPLE_APP.TOUR.RESULT",
+      "title": {
+        "en-US": "Done"
+      },
+      "text": {
+        "en-US": "Both prices changed at once — one click instead of editing each product."
+      },
       "placement": "bottom"
     }
   ]

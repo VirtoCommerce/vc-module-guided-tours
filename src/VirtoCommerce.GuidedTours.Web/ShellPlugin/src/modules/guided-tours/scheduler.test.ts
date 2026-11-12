@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { startScheduler, type Scheduler } from "./scheduler";
-import { createFakeContext, createFakeRenderer, createMemorySource, flush, translate, until } from "./test-helpers";
+import { createFakeContext, createFakeRenderer, createMemorySource, en, flush, translate, until } from "./test-helpers";
 import type { TourDefinition, ToursState } from "./types";
 
 let scheduler: Scheduler | undefined;
@@ -12,7 +12,7 @@ afterEach(() => {
 });
 
 function tour(id: string, overrides: Partial<TourDefinition> = {}): TourDefinition {
-  return { id, version: 1, trigger: { appReady: true }, steps: [{ text: id }], ...overrides };
+  return { id, version: 1, title: en(id), trigger: { appReady: true }, steps: [{ text: en(id) }], ...overrides };
 }
 
 function start(tours: TourDefinition[], options: { state?: ToursState; permissions?: string[] } = {}) {
