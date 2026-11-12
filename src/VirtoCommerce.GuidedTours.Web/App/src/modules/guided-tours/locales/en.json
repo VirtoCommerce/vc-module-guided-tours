@@ -1,0 +1,178 @@
+{
+  "GUIDED_TOURS": {
+    "TITLE": "Guided Tours",
+    "MENU": {
+      "TITLE": "Guided Tours"
+    },
+    "LANGUAGE": "Language",
+    "ID_VERSION": "{id} · v{version}",
+    "LIST": {
+      "TITLE": "Guided Tours",
+      "TOOLBAR": {
+        "ADD": "Add tour",
+        "REFRESH": "Refresh"
+      },
+      "SHOW_TO_USERS": "Show tours to users",
+      "SEARCH": "Search tours",
+      "COLUMNS": {
+        "TOUR": "Tour",
+        "SOURCE": "Source",
+        "APP": "App",
+        "STEPS": "Steps",
+        "ON": "On"
+      },
+      "CUSTOM": "Custom",
+      "CONFLICT": "conflict",
+      "TOUR_SWITCH": "Show {id} to users",
+      "EMPTY": "No tours yet",
+      "NOT_FOUND": "No tours match the search"
+    },
+    "DETAILS": {
+      "TITLE_NEW": "New tour",
+      "TOOLBAR": {
+        "LAUNCH": "Launch",
+        "COPY": "Copy as custom",
+        "SAVE": "Save",
+        "DELETE": "Delete"
+      },
+      "FACTS": {
+        "ID_VERSION": "Id / version",
+        "SOURCE": "Source",
+        "STARTS_WHEN": "Starts when",
+        "SHOWN_TO": "Shown to",
+        "NOT_SHOWN_TO": "Not shown to",
+        "STATUS": "Status",
+        "MODIFIED": "Modified"
+      },
+      "MODULE_SOURCE": "module {module}, read-only",
+      "CUSTOM_SOURCE": "custom tour",
+      "ON_FOR_USERS": "On for users",
+      "OFF_FOR_USERS": "Off for users",
+      "MODIFIED_BY": "{date} by {user}",
+      "TABS": {
+        "STEPS": "Steps",
+        "JSON": "JSON"
+      },
+      "NO_STEPS": "This tour has no steps.",
+      "STEP_LANGUAGE": "shown in {language}",
+      "PUBLISH_NOTE": "Saving publishes the change to users at once.",
+      "NEW_NOTE": "A new tour is saved switched off.",
+      "CONFLICT_NOTE": "A module tour uses the id {id}. This custom tour is not shown to users and cannot be launched until it gets another id.",
+      "NOT_FOUND": "There is no tour with the id {id}.",
+      "JSON_READ_ONLY": "The tour as JSON"
+    },
+    "EDITOR": {
+      "ID": "Id",
+      "VERSION": "Version",
+      "VERSION_HINT": "Raise it when users must see the tour again. Saving does not change it.",
+      "APP": "App",
+      "TITLE": "Title",
+      "TRIGGER": "Starts when",
+      "TRIGGER_KINDS": {
+        "APP_READY": "the app starts",
+        "BLADE_OPENED": "a blade opens",
+        "OTHER": "a trigger this form cannot show"
+      },
+      "TRIGGER_OTHER_NOTE": "Edit the trigger in the JSON tab.",
+      "BLADE": "Blade name",
+      "PERMISSIONS": "Shown to users with any of these permissions",
+      "PERMISSIONS_PLACEHOLDER": "Type a permission and press Enter",
+      "STEPS": "Steps",
+      "STEP": "Step {number}",
+      "STEP_KIND": "Type",
+      "KINDS": {
+        "HINT": "Hint",
+        "ACTION": "Action"
+      },
+      "TARGET": "Points at",
+      "TARGET_KINDS": {
+        "NONE": "nothing, centred",
+        "ANCHOR": "a data-tour name",
+        "CSS": "a CSS selector",
+        "OTHER": "a target this form cannot show"
+      },
+      "TARGET_OTHER_NOTE": "Edit the target in the JSON tab.",
+      "ANCHOR": "data-tour name",
+      "CSS": "CSS selector",
+      "LABEL": "Label",
+      "LABEL_HINT": "What the step list calls the target, for example search field",
+      "WAITS": "Waits until",
+      "CONDITIONS": {
+        "BLADE_OPENED": "a blade opens",
+        "BLADE_QUERY_CHANGED": "the list parameters of a blade change",
+        "ROUTE_CHANGED": "the route changes",
+        "ELEMENT_APPEARS": "an element appears",
+        "CLICK": "a click on the target",
+        "OTHER": "a condition this form cannot show"
+      },
+      "CONDITION_OTHER_NOTE": "Edit the condition in the JSON tab.",
+      "ELEMENT": "Element",
+      "AT_LEAST": "At least",
+      "AT_LEAST_HINT": "How many matching elements, visible or not. Empty means one.",
+      "STEP_TITLE": "Title",
+      "STEP_TEXT": "Text",
+      "ADD_STEP": "Add step",
+      "MOVE_UP": "Move up",
+      "MOVE_DOWN": "Move down",
+      "REMOVE_STEP": "Remove step",
+      "JSON": "Tour JSON"
+    },
+    "PROBLEMS": {
+      "TITLE": "Can't save — {count} problem | Can't save — {count} problems",
+      "ROOT": "tour",
+      "INVALID_JSON": "the text is not valid JSON: {error}"
+    },
+    "ADD": {
+      "TITLE": "Add tour",
+      "TOOLBAR": {
+        "CREATE": "Create from JSON",
+        "EMPTY": "Empty tour"
+      },
+      "JSON": "Tour JSON",
+      "JSON_PLACEHOLDER": "Paste a tour as JSON",
+      "NOTE": "Paste a tour and create it, or start from an empty tour. A new tour starts switched off."
+    },
+    "ALERTS": {
+      "CLOSE_CONFIRMATION": "You have unsaved changes. Close the tour anyway?",
+      "DELETE_CONFIRMATION": "Delete the tour {id}? This cannot be undone.",
+      "SAVED": "Tour saved",
+      "CREATED": "Tour created switched off",
+      "DELETED": "Tour deleted",
+      "COPIED": "Copied as {id}, switched off"
+    },
+    "DESCRIBE": {
+      "KIND": {
+        "HINT": "Hint",
+        "ACTION": "Action"
+      },
+      "TARGET": {
+        "LABEL": "“{label}”",
+        "ANCHOR": "[data-tour=\"{name}\"]",
+        "CENTRED": "centred",
+        "ON": "on {target}"
+      },
+      "WAITS": {
+        "BLADE_OPENED": "Waits until blade {blade} opens",
+        "BLADE_QUERY_CHANGED": "Waits until the list parameters of {blade} change (search, sort, page)",
+        "ROUTE_CHANGED": "Waits until the route changes",
+        "ELEMENT_APPEARS": "Waits until {target} appears",
+        "ELEMENTS_APPEAR": "Waits until at least {count} of {target} appear",
+        "CLICK": "Waits for a click on the target",
+        "CLICK_ON": "Waits for a click on {target}",
+        "UNKNOWN": "Waits for a condition this view cannot describe"
+      },
+      "TIMEOUT": "offers to skip after {seconds} s",
+      "TRIGGER": {
+        "BLADE_OPENED": "blade {blade} opens",
+        "APP_READY": "app starts",
+        "UNKNOWN": "a trigger this view cannot describe"
+      },
+      "AUDIENCE": {
+        "ALL": "all users",
+        "ONE": "users with {permission}",
+        "ANY": "users with any of {permissions}"
+      },
+      "PUBLISHED_AT": "users created after {date}"
+    }
+  }
+}
