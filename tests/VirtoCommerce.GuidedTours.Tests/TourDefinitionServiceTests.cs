@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Newtonsoft.Json.Linq;
+using VirtoCommerce.GuidedTours.Core;
 using VirtoCommerce.GuidedTours.Web.Services;
 using VirtoCommerce.Platform.Core.Modularity;
 using Xunit;
@@ -149,7 +150,7 @@ public sealed class TourDefinitionServiceTests : IDisposable
     {
         public ModuleFolder WithTour(string appId, string fileName, string content)
         {
-            var folder = Path.Combine(path, "tours", appId);
+            var folder = Path.Combine(path, ModuleConstants.ToursFolder, appId);
             Directory.CreateDirectory(folder);
             File.WriteAllText(Path.Combine(folder, fileName), content);
 
