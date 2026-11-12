@@ -34,8 +34,13 @@ public class GuidedToursController(
         }
 
         var user = await userManager.GetUserAsync(User);
-        var tours = tourDefinitionService.GetTours(appId)
-            .Where(tour => TourAudience.IsRelevantFor(tour, user?.CreatedDate))
+        var tours = tourDefinitionService.GetTours()
+            .Where(x => x.AppId == appId && TourAudience.IsRelevantFor(x.Tour, user?.CreatedDate))
+            .Select(x =>
+            {
+                x.Tour["moduleId"] = x.ModuleId;
+                return x.Tour;
+            })
             .ToList();
 
         return Ok(tours);

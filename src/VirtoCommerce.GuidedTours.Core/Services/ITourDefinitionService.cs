@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+using VirtoCommerce.GuidedTours.Core.Models;
 
 namespace VirtoCommerce.GuidedTours.Core.Services;
 
 public interface ITourDefinitionService
 {
     /// <summary>
-    /// Tour definitions every installed module ships for the given host app,
-    /// each with the declaring module's id added as <c>moduleId</c>.
-    /// Definitions without an id, a positive version or at least one step are skipped.
+    /// Tours every installed module ships in <c>{moduleRoot}/tours/{appId}/*.json</c>, for all apps,
+    /// each with <c>appId</c> set from its folder. Files that fail format validation are skipped,
+    /// and so is a tour whose id an earlier module already uses.
     /// </summary>
-    IList<JObject> GetTours(string appId);
+    IList<ModuleTour> GetTours();
 }
