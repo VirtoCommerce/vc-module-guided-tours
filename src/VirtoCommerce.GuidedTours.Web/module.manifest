@@ -12,6 +12,16 @@
   <title>Guided Tours</title>
   <description>Shows Backoffice users a short interactive tour of a new feature the first time they open its screen. Any module can ship its own tours.</description>
 
+  <apps>
+    <app id="guided-tours">
+      <title>Guided Tours</title>
+      <description>Shows Backoffice users a short interactive tour of a new feature the first time they open its screen. Any module can ship its own tours.</description>
+      <iconUrl>/modules/$(VirtoCommerce.GuidedTours)/Content/logo.png</iconUrl>
+      <permission>guided-tours:access</permission>
+      <supportEmbeddedMode>true</supportEmbeddedMode>
+    </app>
+  </apps>
+
   <authors>
     <author>Ivan Kalachikov</author>
   </authors>
