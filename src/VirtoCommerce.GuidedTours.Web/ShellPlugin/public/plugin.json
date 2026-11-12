@@ -1,0 +1,3 @@
+{
+  "remote": { "name": "guided_tours_admin", "exposed": "./Module" }
+}

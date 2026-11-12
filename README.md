@@ -75,7 +75,7 @@ A tour closes without being remembered when its trigger blade closes, and starts
 | Setting | Scope | Description |
 | --- | --- | --- |
 | `GuidedTours.Enabled` | Global | Shows tours. Turn off to hide every tour. |
-| `GuidedTours.State` | Per user | Tour progress, read and written by the VC-Shell plugin through `/api/platform/settings/v2/me/values`. Hidden. |
+| `GuidedTours.State` | Per user | Tour progress, read and written by the VC-Shell plugin through `/api/platform/settings/v2/me/values`. |
 
 ### Permissions
 

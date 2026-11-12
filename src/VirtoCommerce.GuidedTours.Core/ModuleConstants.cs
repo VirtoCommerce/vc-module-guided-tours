@@ -40,7 +40,8 @@ public static class ModuleConstants
             /// <summary>
             /// Per-user tour progress keyed by tour id:
             /// <c>{ "tours": { "orders.basics": { "version": 1, "status": "completed" } } }</c>.
-            /// The frontend reads and writes it through <c>/api/platform/settings/v2/me/values</c>.
+            /// The frontend reads and writes it through <c>/api/platform/settings/v2/me/values</c>,
+            /// which ignores hidden settings, so this one stays visible.
             /// </summary>
             public static SettingDescriptor State { get; } = new()
             {
@@ -48,7 +49,6 @@ public static class ModuleConstants
                 GroupName = "Guided Tours|User",
                 ValueType = SettingValueType.Json,
                 DefaultValue = "{}",
-                IsHidden = true,
                 Tenant = UserProfileTenant,
             };
 
