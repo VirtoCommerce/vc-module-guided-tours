@@ -1,4 +1,8 @@
 {
+  "permissions": {
+    "guided-tours:access": "Open the Guided Tours app, see tours and launch them",
+    "guided-tours:manage": "Create, edit, delete and copy tours, switch tours on and off"
+  },
   "settings": {
     "GuidedTours": {
       "Enabled": {

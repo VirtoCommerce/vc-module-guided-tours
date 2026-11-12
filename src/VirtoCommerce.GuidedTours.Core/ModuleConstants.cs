@@ -14,6 +14,21 @@ public static class ModuleConstants
 
     public const string UserProfileTenant = "UserProfile";
 
+    public static class Security
+    {
+        public static class Permissions
+        {
+            public const string Access = "guided-tours:access";
+            public const string Manage = "guided-tours:manage";
+
+            public static string[] AllPermissions { get; } =
+            [
+                Access,
+                Manage,
+            ];
+        }
+    }
+
     public static class Settings
     {
         public static class General

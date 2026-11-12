@@ -9,6 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Core", "src\VirtoCommerce.GuidedTours.Core\VirtoCommerce.GuidedTours.Core.csproj", "{88E7062B-C3B5-4FBF-AED7-956417A9AC62}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Data", "src\VirtoCommerce.GuidedTours.Data\VirtoCommerce.GuidedTours.Data.csproj", "{7542FD1F-2355-4D9A-9F47-F96968E17BFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Data.MySql", "src\VirtoCommerce.GuidedTours.Data.MySql\VirtoCommerce.GuidedTours.Data.MySql.csproj", "{32567FB6-67D8-452B-9BF7-9A549A7D735D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Data.PostgreSql", "src\VirtoCommerce.GuidedTours.Data.PostgreSql\VirtoCommerce.GuidedTours.Data.PostgreSql.csproj", "{4074DC15-7840-4913-99EE-AC8BCCCADDB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Data.SqlServer", "src\VirtoCommerce.GuidedTours.Data.SqlServer\VirtoCommerce.GuidedTours.Data.SqlServer.csproj", "{7F6EFCFC-6C50-428C-816E-BC900A4BEC39}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FB00BC62-5C1A-40E8-A26F-1BB8DC625937}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.GuidedTours.Tests", "tests\VirtoCommerce.GuidedTours.Tests\VirtoCommerce.GuidedTours.Tests.csproj", "{EDED60F5-6CE3-4656-9967-09FC80D6438C}"
@@ -42,6 +50,22 @@ Global
 		{EDED60F5-6CE3-4656-9967-09FC80D6438C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDED60F5-6CE3-4656-9967-09FC80D6438C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDED60F5-6CE3-4656-9967-09FC80D6438C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7542FD1F-2355-4D9A-9F47-F96968E17BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7542FD1F-2355-4D9A-9F47-F96968E17BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7542FD1F-2355-4D9A-9F47-F96968E17BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7542FD1F-2355-4D9A-9F47-F96968E17BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32567FB6-67D8-452B-9BF7-9A549A7D735D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32567FB6-67D8-452B-9BF7-9A549A7D735D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32567FB6-67D8-452B-9BF7-9A549A7D735D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32567FB6-67D8-452B-9BF7-9A549A7D735D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4074DC15-7840-4913-99EE-AC8BCCCADDB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4074DC15-7840-4913-99EE-AC8BCCCADDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4074DC15-7840-4913-99EE-AC8BCCCADDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4074DC15-7840-4913-99EE-AC8BCCCADDB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F6EFCFC-6C50-428C-816E-BC900A4BEC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F6EFCFC-6C50-428C-816E-BC900A4BEC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F6EFCFC-6C50-428C-816E-BC900A4BEC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F6EFCFC-6C50-428C-816E-BC900A4BEC39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +74,10 @@ Global
 		{EE6454B3-C7A1-4284-863B-1D624EC0FFA6} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
 		{88E7062B-C3B5-4FBF-AED7-956417A9AC62} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
 		{EDED60F5-6CE3-4656-9967-09FC80D6438C} = {FB00BC62-5C1A-40E8-A26F-1BB8DC625937}
+		{7542FD1F-2355-4D9A-9F47-F96968E17BFF} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
+		{32567FB6-67D8-452B-9BF7-9A549A7D735D} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
+		{4074DC15-7840-4913-99EE-AC8BCCCADDB2} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
+		{7F6EFCFC-6C50-428C-816E-BC900A4BEC39} = {FE82CBF2-1970-4594-B318-12551CAB68FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BABF3E-C59E-4BF6-A125-3823E6D33533}
