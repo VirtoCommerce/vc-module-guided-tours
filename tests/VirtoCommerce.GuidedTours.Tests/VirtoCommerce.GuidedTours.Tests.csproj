@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\VirtoCommerce.GuidedTours.Core\VirtoCommerce.GuidedTours.Core.csproj" />
+    <ProjectReference Include="..\..\src\VirtoCommerce.GuidedTours.Data\VirtoCommerce.GuidedTours.Data.csproj" />
     <ProjectReference Include="..\..\src\VirtoCommerce.GuidedTours.Web\VirtoCommerce.GuidedTours.Web.csproj" />
   </ItemGroup>
 </Project>

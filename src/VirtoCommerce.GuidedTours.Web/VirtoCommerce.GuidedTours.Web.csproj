@@ -16,6 +16,10 @@
     <Content Remove="ShellPlugin\**" />
     <EmbeddedResource Remove="ShellPlugin\**" />
     <None Remove="ShellPlugin\**" />
+    <Compile Remove="App\**" />
+    <Content Remove="App\**" />
+    <EmbeddedResource Remove="App\**" />
+    <None Remove="App\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Localizations\**">
@@ -24,5 +28,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.GuidedTours.Core\VirtoCommerce.GuidedTours.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.GuidedTours.Data\VirtoCommerce.GuidedTours.Data.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.GuidedTours.Data.MySql\VirtoCommerce.GuidedTours.Data.MySql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.GuidedTours.Data.PostgreSql\VirtoCommerce.GuidedTours.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.GuidedTours.Data.SqlServer\VirtoCommerce.GuidedTours.Data.SqlServer.csproj" />
   </ItemGroup>
 </Project>
