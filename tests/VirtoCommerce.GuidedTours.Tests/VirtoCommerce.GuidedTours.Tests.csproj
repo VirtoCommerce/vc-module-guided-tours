@@ -17,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="xunit.v3" Version="3.2.2" />
     <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.13" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\VirtoCommerce.GuidedTours.Core\VirtoCommerce.GuidedTours.Core.csproj" />

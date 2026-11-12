@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using VirtoCommerce.GuidedTours.Core.Services;
 using VirtoCommerce.GuidedTours.Data.MySql;
 using VirtoCommerce.GuidedTours.Data.PostgreSql;
 using VirtoCommerce.GuidedTours.Data.Repositories;
+using VirtoCommerce.GuidedTours.Data.Services;
 using VirtoCommerce.GuidedTours.Data.SqlServer;
 using VirtoCommerce.GuidedTours.Web.Services;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -44,7 +46,11 @@ public class Module : IModule, IHasConfiguration
             }
         });
 
+        serviceCollection.AddTransient<IGuidedToursRepository, GuidedToursRepository>();
+        serviceCollection.AddTransient<Func<IGuidedToursRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IGuidedToursRepository>());
+
         serviceCollection.AddSingleton<ITourDefinitionService, TourDefinitionService>();
+        serviceCollection.AddTransient<ITourService, TourService>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
