@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-//using VirtoCommerce.Platform.Data.Extensions;
+using VirtoCommerce.GuidedTours.Data.Models;
+using VirtoCommerce.Platform.Data.Extensions;
 using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.GuidedTours.Data.Repositories;
@@ -21,7 +22,11 @@ public class GuidedToursDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Entity<BazQuxEntity>().ToAuditableEntityTable("BazQux");
+        modelBuilder.Entity<CustomTourEntity>().ToAuditableEntityTable("GuidedTour");
+        modelBuilder.Entity<CustomTourEntity>().HasIndex(x => x.TourId).IsUnique();
+
+        modelBuilder.Entity<TourSwitchEntity>().ToAuditableEntityTable("GuidedTourSwitch");
+        modelBuilder.Entity<TourSwitchEntity>().HasIndex(x => x.TourId).IsUnique();
 
         switch (Database.ProviderName)
         {
