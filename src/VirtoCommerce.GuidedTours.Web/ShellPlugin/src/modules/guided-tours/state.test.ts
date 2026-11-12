@@ -1,8 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { isTourDue, normalizeState, recordTour } from "./state";
+import { en } from "./test-helpers";
 import type { TourDefinition } from "./types";
 
-const tour: TourDefinition = { id: "orders.basics", version: 2, trigger: { appReady: true }, steps: [{ text: "x" }] };
+const tour: TourDefinition = {
+  id: "orders.basics",
+  version: 2,
+  title: en("Orders"),
+  trigger: { appReady: true },
+  steps: [{ text: en("x") }],
+};
 
 describe("normalizeState", () => {
   it("reads the state from a JSON string", () => {

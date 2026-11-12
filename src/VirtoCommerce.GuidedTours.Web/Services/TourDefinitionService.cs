@@ -1,57 +1,74 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VirtoCommerce.GuidedTours.Core;
+using VirtoCommerce.GuidedTours.Core.Models;
 using VirtoCommerce.GuidedTours.Core.Services;
+using VirtoCommerce.GuidedTours.Core.Validation;
 using VirtoCommerce.Platform.Core.Modularity;
 
 namespace VirtoCommerce.GuidedTours.Web.Services;
 
-public partial class TourDefinitionService(IModuleService moduleService, ILogger<TourDefinitionService> logger) : ITourDefinitionService
+public class TourDefinitionService : ITourDefinitionService
 {
-    private readonly ConcurrentDictionary<string, IList<JObject>> _cache = new(StringComparer.OrdinalIgnoreCase);
+    private readonly IModuleService _moduleService;
+    private readonly ILogger<TourDefinitionService> _logger;
+    private readonly Lazy<List<ModuleTour>> _tours;
 
-    [GeneratedRegex("^[a-z0-9][a-z0-9-]*$", RegexOptions.IgnoreCase)]
-    private static partial Regex AppIdRegex();
-
-    public IList<JObject> GetTours(string appId)
+    public TourDefinitionService(IModuleService moduleService, ILogger<TourDefinitionService> logger)
     {
-        if (string.IsNullOrEmpty(appId) || !AppIdRegex().IsMatch(appId))
-        {
-            return [];
-        }
+        _moduleService = moduleService;
+        _logger = logger;
 
         // Installed modules only change on a platform restart, so the result is stable for the process lifetime.
-        return _cache.GetOrAdd(appId, LoadTours)
-            .Select(x => (JObject)x.DeepClone())
+        _tours = new Lazy<List<ModuleTour>>(LoadTours);
+    }
+
+    public IList<ModuleTour> GetTours()
+    {
+        return _tours.Value
+            .Select(x => new ModuleTour { ModuleId = x.ModuleId, Tour = (JObject)x.Tour.DeepClone() })
             .ToList();
     }
 
-    private List<JObject> LoadTours(string appId)
+    private List<ModuleTour> LoadTours()
     {
-        var result = new List<JObject>();
+        var result = new List<ModuleTour>();
+        var moduleIdByTourId = new Dictionary<string, string>(StringComparer.Ordinal);
 
-        foreach (var module in moduleService.GetInstalledModules().Where(x => !string.IsNullOrEmpty(x.FullPhysicalPath)))
+        foreach (var module in _moduleService.GetInstalledModules().Where(x => !string.IsNullOrEmpty(x.FullPhysicalPath)))
         {
-            var folder = Path.Combine(module.FullPhysicalPath, ModuleConstants.ToursFolder, appId);
-            if (!Directory.Exists(folder))
+            var toursFolder = Path.Combine(module.FullPhysicalPath, ModuleConstants.ToursFolder);
+            if (!Directory.Exists(toursFolder))
             {
                 continue;
             }
 
-            foreach (var file in Directory.EnumerateFiles(folder, "*.json").Order(StringComparer.Ordinal))
+            foreach (var appFolder in Directory.EnumerateDirectories(toursFolder).Order(StringComparer.Ordinal))
             {
-                var tour = ReadTour(file);
-                if (tour != null)
+                var appId = Path.GetFileName(appFolder);
+
+                foreach (var file in Directory.EnumerateFiles(appFolder, "*.json").Order(StringComparer.Ordinal))
                 {
-                    tour["moduleId"] = module.Id;
-                    result.Add(tour);
+                    var tour = ReadTour(file, appId);
+                    if (tour is null)
+                    {
+                        continue;
+                    }
+
+                    var tourId = tour.Value<string>("id");
+                    if (moduleIdByTourId.TryGetValue(tourId, out var ownerModuleId))
+                    {
+                        _logger.LogWarning("Skipping tour {File}: module {ModuleId} already ships a tour with id {TourId}", file, ownerModuleId, tourId);
+                        continue;
+                    }
+
+                    moduleIdByTourId[tourId] = module.Id;
+                    result.Add(new ModuleTour { ModuleId = module.Id, Tour = tour });
                 }
             }
         }
@@ -59,28 +76,34 @@ public partial class TourDefinitionService(IModuleService moduleService, ILogger
         return result;
     }
 
-    private JObject ReadTour(string file)
+    private JObject ReadTour(string file, string appId)
     {
         try
         {
-            var tour = JObject.Parse(File.ReadAllText(file));
-
-            var isValid = tour.Value<string>("id") is { Length: > 0 }
-                && tour["version"]?.Type == JTokenType.Integer && tour.Value<int>("version") > 0
-                && tour["steps"] is JArray { Count: > 0 };
-
-            if (isValid)
+            var token = TourJson.Parse(File.ReadAllText(file));
+            if (token is JObject tour)
             {
-                return tour;
+                tour["appId"] = appId;
             }
 
-            logger.LogWarning("Skipping tour {File}: it needs an id, a positive integer version and at least one step", file);
+            var problems = TourValidator.Validate(token);
+            if (problems.Count == 0)
+            {
+                return (JObject)token;
+            }
+
+            _logger.LogWarning("Skipping invalid tour {File}: {Problems}", file, string.Join("; ", problems.Select(FormatProblem)));
         }
         catch (Exception ex) when (ex is JsonException or IOException)
         {
-            logger.LogWarning(ex, "Skipping unreadable tour {File}", file);
+            _logger.LogWarning(ex, "Skipping unreadable tour {File}", file);
         }
 
         return null;
+    }
+
+    private static string FormatProblem(TourProblem problem)
+    {
+        return problem.Path.Length == 0 ? problem.Message : $"{problem.Path}: {problem.Message}";
     }
 }

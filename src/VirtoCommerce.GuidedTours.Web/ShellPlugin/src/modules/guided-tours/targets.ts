@@ -1,7 +1,12 @@
 import type { TourTarget } from "./types";
 
+const anchorSelector = (name: string) => `[data-tour="${name.replace(/["\\]/g, "\\$&")}"]`;
+
 export function selectorOf(target: TourTarget): string {
-  return typeof target === "string" ? `[data-tour="${target.replace(/["\\]/g, "\\$&")}"]` : target.css;
+  if (typeof target === "string") {
+    return anchorSelector(target);
+  }
+  return "css" in target ? target.css : anchorSelector(target.anchor);
 }
 
 function isVisible(element: HTMLElement): boolean {
