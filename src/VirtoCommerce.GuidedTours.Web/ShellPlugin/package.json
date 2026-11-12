@@ -7,7 +7,8 @@
     "build": "cross-env APP_ENV=production vite build",
     "build:types": "vue-tsc --declaration --emitDeclarationOnly --outDir dist/types",
     "type-check": "vue-tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "build:admin-shell": "cross-env APP_ENV=production vite build --config vite.admin-shell.config.mts"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
