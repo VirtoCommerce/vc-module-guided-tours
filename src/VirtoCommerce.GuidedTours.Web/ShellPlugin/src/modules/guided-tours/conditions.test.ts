@@ -14,6 +14,8 @@ describe("targets", () => {
 
     expect(findTarget("orders.table")).toBe(anchor);
     expect(findTarget({ css: '[data-tour="orders.table"] .pager button' })?.textContent).toBe("2");
+    expect(findTarget({ anchor: "orders.table", label: "orders table" })).toBe(anchor);
+    expect(findTarget({ css: '[data-tour="orders.table"] .pager', label: "pager" })?.tagName).toBe("NAV");
   });
 
   it("waits for a target that renders later", async () => {

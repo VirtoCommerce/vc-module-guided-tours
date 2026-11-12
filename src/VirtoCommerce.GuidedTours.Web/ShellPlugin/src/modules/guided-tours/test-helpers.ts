@@ -1,6 +1,8 @@
 import { ref } from "vue";
 import type { StepButton, StepView, TourRenderer } from "./runner";
-import type { BladeSnapshot, TourContext, TourDefinition, TourSource, ToursState } from "./types";
+import type { BladeSnapshot, TourContext, TourDefinition, TourSource, TourText, ToursState } from "./types";
+
+export const en = (value: string): TourText => ({ "en-US": value });
 
 export function createFakeRenderer() {
   const views: StepView[] = [];
@@ -40,17 +42,20 @@ export function createFakeRenderer() {
 export function createFakeContext() {
   const blades = ref<BladeSnapshot[]>([]);
   const route = ref("/");
+  const locale = ref("en");
   const context: TourContext = {
     blades: () => blades.value,
     route: () => route.value,
+    locale: () => locale.value,
   };
-  return { context, blades, route };
+  return { context, blades, route, locale };
 }
 
 export function createMemorySource(tours: TourDefinition[], state: ToursState = { tours: {} }) {
   const saved: ToursState[] = [];
   const source: TourSource = {
     loadTours: async () => tours,
+    loadTour: async (id) => tours.find((tour) => tour.id === id),
     loadState: async () => state,
     saveState: async (value) => {
       saved.push(value);
